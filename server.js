@@ -16,24 +16,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// CORS Configuration for Production
 const corsOptions = {
-    origin: function (origin, callback) {
-        const allowedOrigins = [
-            'http://localhost:5173', // Development
-            'http://localhost:3000', // Alternative dev port
-            'https://vitality-fit-mu.vercel.app', // Production frontend
-            process.env.FRONTEND_URL // Production (set in deployment)
-        ].filter(Boolean); // Remove undefined values
-
-        // Allow requests with no origin (mobile apps, Postman, etc.)
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true
+    origin: true, // Reflects the request origin, allowing all origins with credentials
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
