@@ -40,10 +40,15 @@ app.use(cors(corsOptions));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// Sync Database
-sequelize.sync({ alter: true }).then(() => {
-    console.log('Database synced');
-});
+// Sync Database with error handling
+sequelize.sync({ alter: true })
+    .then(() => {
+        console.log('✅ Database synced successfully');
+    })
+    .catch((err) => {
+        console.error('❌ Database sync failed:', err.message);
+        console.error('Server will continue to run, but database operations may fail.');
+    });
 
 // --- Auth ---
 app.post('/api/auth/register', async (req, res) => {
