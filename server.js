@@ -392,6 +392,15 @@ app.get('/api/activity-log/:userId/stats', async (req, res) => {
     }
 });
 
+// --- Health Check & Test Endpoints ---
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: 'ok', uptime: process.uptime() });
+});
+
+app.get('/api/test', (req, res) => {
+    res.status(200).json({ message: 'Backend is reachable and working!' });
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
