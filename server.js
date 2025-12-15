@@ -22,6 +22,7 @@ const corsOptions = {
         const allowedOrigins = [
             'http://localhost:5173', // Development
             'http://localhost:3000', // Alternative dev port
+            'https://vitality-fit-mu.vercel.app', // Production frontend
             process.env.FRONTEND_URL // Production (set in deployment)
         ].filter(Boolean); // Remove undefined values
 
